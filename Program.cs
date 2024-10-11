@@ -37,6 +37,7 @@ class Program
         //* Open and display a to-do list
         string? toDoListName;
         string toDoListPath = "";
+        bool shouldExit = false;
 
         try
         {
@@ -68,6 +69,31 @@ class Program
         catch (IOException)
         {
             Console.WriteLine("An error occurred.");
+        }
+
+        while (!shouldExit)
+        {
+            try
+            {
+                Console.WriteLine();
+                Console.WriteLine("Do you want to edit the list? (y/n)");
+
+                string? readResult = Console.ReadLine();
+                if (readResult == null)
+                    throw new IOException("You entered an empty text. Please enter your input.");
+                else if (readResult.ToLower().Trim().Equals("y"))
+                {
+                    shouldExit = true;
+                    EditList();
+                }
+                else if (readResult.ToLower().Trim().Equals("n"))
+                    shouldExit = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
     }
 
@@ -149,9 +175,15 @@ class Program
         }
     }
 
+    static void EditList()
+    {
+
+    }
+
     static void TerminateProgram()
     {
-        //* Exit program
+        //* Clear the console and exit the program
+        Console.Clear();
         Console.WriteLine("Exiting.");
         Environment.Exit(1);
     }

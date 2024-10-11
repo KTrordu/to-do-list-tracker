@@ -12,3 +12,4 @@ C:\github\projects\to-do-list-tracker\obj\Debug\net8.0\refint\to-do-list-tracker
 C:\github\projects\to-do-list-tracker\obj\Debug\net8.0\to-do-list-tracker.pdb
 C:\github\projects\to-do-list-tracker\obj\Debug\net8.0\to-do-list-tracker.genruntimeconfig.cache
 C:\github\projects\to-do-list-tracker\obj\Debug\net8.0\ref\to-do-list-tracker.dll
+C:\github\projects\to-do-list-tracker\obj\Debug\net8.0\to-do-list-tracker.sourcelink.json
