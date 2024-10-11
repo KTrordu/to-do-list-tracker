@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "to-do-list-tracker", "to-do-list-tracker.csproj", "{9DE6EF8A-810E-4A5F-A916-BC5966853DEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DE6EF8A-810E-4A5F-A916-BC5966853DEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DE6EF8A-810E-4A5F-A916-BC5966853DEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DE6EF8A-810E-4A5F-A916-BC5966853DEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DE6EF8A-810E-4A5F-A916-BC5966853DEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {133D052E-3BAA-494D-97C0-184651A11CF1}
+	EndGlobalSection
+EndGlobal
