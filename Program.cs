@@ -4,6 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.Clear();
         Console.WriteLine("Welcome. Your To-Do Lists: ");
         DisplayToDoLists();
 
@@ -33,17 +34,19 @@ class Program
 
     static void OpenToDoList()
     {
-        string? toDoListPath = "";
+        //* Open and display a to-do list
+        string? toDoListName;
+        string toDoListPath = "";
 
         try
         {
             Console.WriteLine("Please enter the name of the To-Do List you want to open: ");
-            toDoListPath = Console.ReadLine();
+            toDoListName = Console.ReadLine();
 
             if (toDoListPath == null)
                 throw new IOException("You entered an empty text. Please enter your input.");
 
-            toDoListPath = $"./todo-lists/{toDoListPath}";
+            toDoListPath = $"./todo-lists/{toDoListName}";
         }
         catch (Exception ex)
         {
@@ -76,6 +79,7 @@ class Program
         Console.WriteLine("2 - Open a To-Do List");
         Console.WriteLine("3 - Create a New To-Do List");
         Console.WriteLine("4 - Remove a To-Do List");
+        Console.WriteLine("! - Type exit to exit.");
         Console.WriteLine();
     }
 
@@ -87,6 +91,9 @@ class Program
             string? readResult = Console.ReadLine();
             if (readResult == null)
                 throw new IOException("You entered an empty text. Please enter your input.");
+
+            if (readResult.ToLower().Trim().Equals("exit"))
+                TerminateProgram();
 
             switch (readResult)
             {
@@ -102,6 +109,7 @@ class Program
                     break;
 
                 case "4":
+                    RemoveToDoList();
                     break;
 
                 default:
@@ -112,5 +120,39 @@ class Program
         {
             Console.WriteLine(ex.Message);
         }
+    }
+
+    static void RemoveToDoList()
+    {
+        //* Remove a to-do list
+        try
+        {
+            string? toDoListName;
+
+            Console.WriteLine("Please enter the To-Do List's name which you want to remove: ");
+            toDoListName = Console.ReadLine();
+            string toDoListPath = $"./todo-lists/{toDoListName}";
+
+            if (File.Exists(toDoListPath))
+            {
+                File.Delete(toDoListPath);
+                Console.WriteLine($"File deleted: {toDoListPath}");
+            }
+            else
+            {
+                throw new IOException("The specified file does not exist.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    static void TerminateProgram()
+    {
+        //* Exit program
+        Console.WriteLine("Exiting.");
+        Environment.Exit(1);
     }
 }
