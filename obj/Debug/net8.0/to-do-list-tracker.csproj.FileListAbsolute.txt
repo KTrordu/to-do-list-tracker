@@ -1,0 +1,14 @@
+C:\github\projects\to-do-list-tracker\bin\Debug\net8.0\to-do-list-tracker.exe
+C:\github\projects\to-do-list-tracker\bin\Debug\net8.0\to-do-list-tracker.deps.json
+C:\github\projects\to-do-list-tracker\bin\Debug\net8.0\to-do-list-tracker.runtimeconfig.json
+C:\github\projects\to-do-list-tracker\bin\Debug\net8.0\to-do-list-tracker.dll
+C:\github\projects\to-do-list-tracker\bin\Debug\net8.0\to-do-list-tracker.pdb
+C:\github\projects\to-do-list-tracker\obj\Debug\net8.0\to-do-list-tracker.GeneratedMSBuildEditorConfig.editorconfig
+C:\github\projects\to-do-list-tracker\obj\Debug\net8.0\to-do-list-tracker.AssemblyInfoInputs.cache
+C:\github\projects\to-do-list-tracker\obj\Debug\net8.0\to-do-list-tracker.AssemblyInfo.cs
+C:\github\projects\to-do-list-tracker\obj\Debug\net8.0\to-do-list-tracker.csproj.CoreCompileInputs.cache
+C:\github\projects\to-do-list-tracker\obj\Debug\net8.0\to-do-list-tracker.dll
+C:\github\projects\to-do-list-tracker\obj\Debug\net8.0\refint\to-do-list-tracker.dll
+C:\github\projects\to-do-list-tracker\obj\Debug\net8.0\to-do-list-tracker.pdb
+C:\github\projects\to-do-list-tracker\obj\Debug\net8.0\to-do-list-tracker.genruntimeconfig.cache
+C:\github\projects\to-do-list-tracker\obj\Debug\net8.0\ref\to-do-list-tracker.dll
