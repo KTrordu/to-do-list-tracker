@@ -21,6 +21,8 @@ class Program
     {
         try
         {
+            Console.Clear();
+
             //* Get and display files under todo-lists folder
             string toDoListLocation = @"C:\github\projects\to-do-list-tracker\todo-lists";
             string[] files = Directory.GetFiles(toDoListLocation);
@@ -56,19 +58,17 @@ class Program
 
         try
         {
-            string[] lines = File.ReadAllLines(toDoListPath);
-            foreach (string line in lines)
-            {
-                Console.WriteLine(line);
-            }
+            DisplayToDoList(toDoListPath);
         }
         catch (FileNotFoundException)
         {
             Console.WriteLine("File not found.");
+            shouldExit = true;
         }
         catch (IOException)
         {
             Console.WriteLine("An error occurred.");
+            shouldExit = true;
         }
 
         while (!shouldExit)
@@ -84,7 +84,7 @@ class Program
                 else if (readResult.ToLower().Trim().Equals("y"))
                 {
                     shouldExit = true;
-                    EditList();
+                    EditList(toDoListPath);
                 }
                 else if (readResult.ToLower().Trim().Equals("n"))
                     shouldExit = true;
@@ -139,6 +139,7 @@ class Program
                     break;
 
                 default:
+                    Console.WriteLine("Please enter a valid value.");
                     break;
             }
         }
@@ -175,9 +176,151 @@ class Program
         }
     }
 
-    static void EditList()
+    static void RemoveToDoList(string toDoListPath)
     {
+        //* Remove a to-do list with a pre-specified name
+        try
+        {
+            if (File.Exists(toDoListPath))
+            {
+                File.Delete(toDoListPath);
+                Console.WriteLine($"File deleted: {toDoListPath}");
+            }
+            else
+            {
+                throw new IOException("The specified file does not exist.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
 
+    static void EditList(string toDoListPath)
+    {
+        Console.Clear();
+
+        bool shouldExit = false;
+
+        //* First read and display all lines from the specified to-do list
+        DisplayToDoList(toDoListPath);
+
+        while (!shouldExit)
+        {
+            Console.WriteLine();
+            Console.WriteLine("1 - Add a new line");
+            Console.WriteLine("2 - Remove existing line");
+            Console.WriteLine("3 - Remove to-do list");
+            Console.WriteLine("4 - Display the list");
+            Console.WriteLine("! - Type \"exit\" to exit.");
+            Console.WriteLine();
+
+            //* Read the user input and direct the app according to it
+            try
+            {
+                string? readResult = Console.ReadLine();
+                if (readResult == null)
+                    throw new IOException("You entered an empty text. Please enter your input.");
+
+                if (readResult.ToLower().Trim().Equals("exit"))
+                    shouldExit = true;
+
+                switch (readResult)
+                {
+                    case "1":
+                        AddNewLineToList(toDoListPath);
+                        break;
+
+                    case "2":
+
+                        break;
+
+                    case "3":
+                        RemoveToDoList(toDoListPath);
+                        break;
+
+                    case "4":
+                        DisplayToDoList(toDoListPath);
+                        break;
+
+                    default:
+                        Console.WriteLine("Please enter a valid value.");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
+
+    static void AddNewLineToList(string toDoListPath)
+    {
+        string? readResult;
+        bool shouldExit = false;
+
+        while (!shouldExit)
+        {
+            try
+            {
+                Console.WriteLine();
+                Console.WriteLine("Please enter the item you want to add to the list. (If you want to exit, type \"exit\".)");
+                Console.WriteLine();
+
+                readResult = Console.ReadLine();
+                if (readResult == null)
+                    throw new IOException("You entered an empty text. Please enter your input.");
+
+                else if (readResult.ToLower().Trim().Equals("exit"))
+                    break;
+
+                File.AppendAllText(toDoListPath, $"\n{readResult}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
+
+    static void DisplayToDoList(string toDoListPath)
+    {
+        string[] toDoListContent = File.ReadAllLines(toDoListPath);
+        foreach (string line in toDoListContent)
+        {
+            Console.WriteLine($"- {line}");
+        }
+    }
+
+    static void RemoveExistingLine(string toDoListPath)
+    {
+        try
+        {
+            string[] toDoListContent = File.ReadAllLines(toDoListPath);
+
+            string? readResult;
+            int readValue;
+
+            Console.WriteLine("Please enter the line number you want to delete.");
+            readResult = Console.ReadLine();
+
+            if (readResult == null)
+                throw new IOException("You entered an empty text. Please enter your input.");
+
+            else if (!int.TryParse(readResult, out readValue))
+                throw new IOException("Please enter a valid numeric value.");
+
+            else if (readValue > toDoListContent.Length)
+                throw new IndexOutOfRangeException("Please enter a value that exists.");
+
+            
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 
     static void TerminateProgram()
