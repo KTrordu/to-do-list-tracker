@@ -24,10 +24,15 @@ class Program
             Console.Clear();
 
             //* Get and display files under todo-lists folder
-            // TODO: Update the locations so that only the name of the files would be displayed
             string toDoListLocation = @"C:\github\projects\to-do-list-tracker\todo-lists";
             string[] files = Directory.GetFiles(toDoListLocation);
-            Console.WriteLine(string.Join(Environment.NewLine, files));
+
+            Console.WriteLine("Current to-do lists: \n");
+            for (int i = 0; i < files.Length; i++)
+            {
+                string[] currentListName = files[i].Split("\\");
+                Console.WriteLine(currentListName[currentListName.Length - 1]);
+            }
         }
         catch (Exception ex)
         {
