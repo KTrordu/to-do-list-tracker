@@ -24,6 +24,7 @@ class Program
             Console.Clear();
 
             //* Get and display files under todo-lists folder
+            // TODO: Update the locations so that only the name of the files would be displayed
             string toDoListLocation = @"C:\github\projects\to-do-list-tracker\todo-lists";
             string[] files = Directory.GetFiles(toDoListLocation);
             Console.WriteLine(string.Join(Environment.NewLine, files));
@@ -132,6 +133,7 @@ class Program
                     break;
 
                 case "3":
+                    CreateNewToDoList();
                     break;
 
                 case "4":
@@ -233,7 +235,7 @@ class Program
                         break;
 
                     case "2":
-
+                        RemoveExistingLine(toDoListPath);
                         break;
 
                     case "3":
@@ -242,10 +244,6 @@ class Program
 
                     case "4":
                         DisplayToDoList(toDoListPath);
-                        break;
-
-                    default:
-                        Console.WriteLine("Please enter a valid value.");
                         break;
                 }
             }
@@ -258,6 +256,7 @@ class Program
 
     static void AddNewLineToList(string toDoListPath)
     {
+        //* Enter a new line to the to-do list with user input
         string? readResult;
         bool shouldExit = false;
 
@@ -287,15 +286,20 @@ class Program
 
     static void DisplayToDoList(string toDoListPath)
     {
+        //* Display a specified to-do list
         string[] toDoListContent = File.ReadAllLines(toDoListPath);
+
+        Console.WriteLine();
         foreach (string line in toDoListContent)
         {
             Console.WriteLine($"- {line}");
         }
+        Console.WriteLine();
     }
 
     static void RemoveExistingLine(string toDoListPath)
     {
+        //* Remove a specified line
         try
         {
             string[] toDoListContent = File.ReadAllLines(toDoListPath);
@@ -315,7 +319,46 @@ class Program
             else if (readValue > toDoListContent.Length)
                 throw new IndexOutOfRangeException("Please enter a value that exists.");
 
-            
+            readValue--;
+            for (int i = readValue + 1; i < toDoListContent.Length; i++)
+            {
+                toDoListContent[i - 1] = toDoListContent[i];
+            }
+
+            string[] newToDoList = new string[toDoListContent.Length - 1];
+            for (int i = 0; i < newToDoList.Length; i++)
+            {
+                newToDoList[i] = toDoListContent[i];
+            }
+
+            File.WriteAllLines(toDoListPath, newToDoList);
+            DisplayToDoList(toDoListPath);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    static void CreateNewToDoList()
+    {
+        //* Create a new to-do list with a title and open the editing view
+        try
+        {
+            string? readResult;
+            string toDoListPath;
+
+            Console.WriteLine("Please enter the name for your list:");
+
+            readResult = Console.ReadLine();
+            if (readResult == null)
+                throw new IOException("You entered an empty text. Please enter your input.");
+
+            toDoListPath = $"./todo-lists/{readResult}.txt";
+            StreamWriter streamWriter = new(toDoListPath);
+            streamWriter.Write($"***{readResult}***");
+            streamWriter.Close();
+            EditList(toDoListPath);
         }
         catch (Exception ex)
         {
