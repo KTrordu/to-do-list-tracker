@@ -215,6 +215,9 @@ class Program
 
         while (!shouldExit)
         {
+            if (!File.Exists(toDoListPath))
+                return;
+
             Console.WriteLine();
             Console.WriteLine("1 - Add a new line");
             Console.WriteLine("2 - Remove existing line");
